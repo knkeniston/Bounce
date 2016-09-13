@@ -10,4 +10,12 @@
 - **[8]** Use fully specified resource path, preload resources if possible
 
 ## Open Issues ##
+
+- **[9]** Cheat codes to allow easy visual/access of all levels and features with single key press
+- **[10]** Paddle that can be controlled by user that influences path of ball
+- **[11]** Bricks placed in some configuration near top of screen and "destroyed" when hit
+- **[12]** Progression of at least 3 levels where game gets more difficult
+- **[13]** "Lives remaining" indicator that shows player initially has 3 lives
+- **[14]** Game Over message when no lives are left
+- **[15]** Customized splash screen with my name
  
