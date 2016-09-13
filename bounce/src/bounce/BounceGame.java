@@ -58,6 +58,7 @@ public class BounceGame extends StateBasedGame {
 	public final int ScreenHeight;
 
 	Ball ball;
+	Paddle paddle;
 	ArrayList<Bang> explosions;
 
 	/**
@@ -100,8 +101,10 @@ public class BounceGame extends StateBasedGame {
 		ResourceManager.loadImage(GAMEOVER_BANNER_RSC);
 		ResourceManager.loadImage(STARTUP_BANNER_RSC);
 		ResourceManager.loadImage(BANG_EXPLOSIONIMG_RSC);
+		ResourceManager.loadImage(PADDLE_PADDLEIMG_RSC);
 		
 		ball = new Ball(ScreenWidth / 2, ScreenHeight / 2, .1f, .2f);
+		paddle = new Paddle(ScreenWidth / 2, ScreenHeight - 13, .1f, .2f);
 
 	}
 	

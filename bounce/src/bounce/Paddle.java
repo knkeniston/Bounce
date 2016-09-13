@@ -14,6 +14,8 @@ import jig.Vector;
 
 	private Vector velocity;
 	private int countdown;
+	public int width;
+	public int height;
 
 	public Paddle(final float x, final float y, final float vx, final float vy) {
 		super(x, y);
@@ -21,6 +23,8 @@ import jig.Vector;
 				.getImage(BounceGame.PADDLE_PADDLEIMG_RSC));
 		velocity = new Vector(vx, vy);
 		countdown = 0;
+		width = 120;
+		height = 25;
 	}
 
 	public void setVelocity(final Vector v) {
