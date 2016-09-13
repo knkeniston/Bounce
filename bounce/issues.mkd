@@ -11,11 +11,13 @@
 
 ## Open Issues ##
 
-- **[9]** Cheat codes to allow easy visual/access of all levels and features with single key press
+- **[9]** Fix ball bounce collision
 - **[10]** Paddle that can be controlled by user that influences path of ball
-- **[11]** Bricks placed in some configuration near top of screen and "destroyed" when hit
-- **[12]** Progression of at least 3 levels where game gets more difficult
-- **[13]** "Lives remaining" indicator that shows player initially has 3 lives
-- **[14]** Game Over message when no lives are left
-- **[15]** Customized splash screen with my name
+- **[11]** "Lives remaining" indicator that shows player initially has 3 lives
+- **[12]** Game Over message when no lives are left
+- **[13]** Bricks placed in some configuration near top of screen and "destroyed" when hit
+- **[14]** Progression of at least 3 levels where game gets more difficult
+- **[15]** Cheat codes to allow easy visual/access of all levels and features with single key press
+- **[16]** Customized splash screen with my name
+
  
