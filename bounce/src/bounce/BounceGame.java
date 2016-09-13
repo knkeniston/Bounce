@@ -104,7 +104,7 @@ public class BounceGame extends StateBasedGame {
 		ResourceManager.loadImage(PADDLE_PADDLEIMG_RSC);
 		
 		ball = new Ball(ScreenWidth / 2, ScreenHeight / 2, .1f, .2f);
-		paddle = new Paddle(ScreenWidth / 2, ScreenHeight - 13, .1f, .2f);
+		paddle = new Paddle(ScreenWidth / 2, ScreenHeight - 13);
 
 	}
 	
