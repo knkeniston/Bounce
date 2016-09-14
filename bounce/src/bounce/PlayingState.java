@@ -25,6 +25,8 @@ import org.newdawn.slick.state.StateBasedGame;
 class PlayingState extends BasicGameState {
 	int bounces;
 	int lives;
+	int timeX;
+	int timeY;
 	
 	@Override
 	public void init(GameContainer container, StateBasedGame game)
@@ -35,6 +37,8 @@ class PlayingState extends BasicGameState {
 	public void enter(GameContainer container, StateBasedGame game) {
 		bounces = 0;
 		lives = 3;
+		timeX = 0;
+		timeY = 0;
 		container.setSoundOn(true);
 	}
 	@Override
@@ -70,12 +74,14 @@ class PlayingState extends BasicGameState {
 		}
 		
 		// bounce the ball...
-		boolean bounced = false;
-		if (bg.ball.getCoarseGrainedMaxX() > bg.ScreenWidth
-				|| bg.ball.getCoarseGrainedMinX() < 0) {
+		boolean bounced = false;		
+		if ((bg.ball.getCoarseGrainedMaxX() > bg.ScreenWidth
+				|| bg.ball.getCoarseGrainedMinX() < 0) && timeX <= 0) {
+			timeX = 10;
 			bg.ball.bounce(90);
 			bounced = true;
-		} else if (bg.ball.getCoarseGrainedMinY() < 0) {
+		} else if (bg.ball.getCoarseGrainedMinY() < 0 && timeY <= 0) {
+			timeY = 10;
 			bg.ball.bounce(0);
 			bounced = true;
 		}
@@ -84,6 +90,8 @@ class PlayingState extends BasicGameState {
 			bg.ball.setPosition(bg.ScreenWidth / 2, bg.ScreenHeight / 2);
 			bg.ball.setLifeWait();
 		}
+		timeX--;
+		timeY--;
 		
 		if (bounced) {
 			bg.explosions.add(new Bang(bg.ball.getX(), bg.ball.getY()));
