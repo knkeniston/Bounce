@@ -91,7 +91,19 @@ class PlayingState extends BasicGameState {
 		// Collision between ball and paddle
 		Collision paddleCol = bg.ball.collides(bg.paddle);
 		if (paddleCol != null && timeLastCol <= 0) {
-			bg.ball.bounce(2);
+			float ballX = bg.ball.getX();
+			float paddleX = bg.paddle.getX();
+			float diffX = Math.abs(paddleX - ballX);
+			float oldSpeed = bg.ball.getVelocity().length();
+			float newX = oldSpeed * (diffX / 100);
+			float newY = (float)Math.sqrt(Math.pow(oldSpeed, 2) - Math.pow(newX, 2));
+			if (ballX < paddleX) {
+				bg.ball.setVelocity(new Vector(-1 * newX, -1 * newY));
+			} else {
+				bg.ball.setVelocity(new Vector(newX, -1 * newY));
+			}
+			
+			//bg.ball.bounce(diffX);
 			timeLastCol = 10;
 		}
 		timeLastCol--;
@@ -117,7 +129,6 @@ class PlayingState extends BasicGameState {
 		for (Brick b : timeBricks.keySet()) {
 			timeBricks.put(b, timeBricks.get(b) - 1);
 		}
-		
 		for (Brick b : toRemove) {
 			bg.bricks.remove(b);
 		}
