@@ -16,8 +16,16 @@ import jig.Vector;
 
 	public Brick(final float x, final float y, int level) {
 		super(x, y);
-		addImageWithBoundingBox(ResourceManager
-				.getImage(BounceGame.BRICK_BRICKIMG_RSC));
+		if (level == 1) {
+			addImageWithBoundingBox(ResourceManager
+					.getImage(BounceGame.BRICK_BRICK_1_IMG_RSC));
+		} else if (level == 2) {
+			addImageWithBoundingBox(ResourceManager
+					.getImage(BounceGame.BRICK_BRICK_2_1_IMG_RSC));
+		} else {
+			addImageWithBoundingBox(ResourceManager
+					.getImage(BounceGame.BRICK_BRICK_3_1_IMG_RSC));
+		}
 		this.level = level;
 		this.health = level;
 	}
@@ -28,6 +36,23 @@ import jig.Vector;
 	
 	public void decHealth() {
 		this.health -= 1;
+		updateImage();
+	}
+	
+	private void updateImage() {
+		if (level == 2 && health == 1) {
+			removeImage(ResourceManager.getImage(BounceGame.BRICK_BRICK_2_1_IMG_RSC));
+			addImageWithBoundingBox(ResourceManager
+					.getImage(BounceGame.BRICK_BRICK_2_2_IMG_RSC));
+		} else if (level == 3 && health == 2) {
+			removeImage(ResourceManager.getImage(BounceGame.BRICK_BRICK_3_1_IMG_RSC));
+			addImageWithBoundingBox(ResourceManager
+					.getImage(BounceGame.BRICK_BRICK_3_2_IMG_RSC));
+		} else if (level == 3 && health == 1) {
+			removeImage(ResourceManager.getImage(BounceGame.BRICK_BRICK_3_2_IMG_RSC));
+			addImageWithBoundingBox(ResourceManager
+					.getImage(BounceGame.BRICK_BRICK_3_3_IMG_RSC));
+		}
 	}
 	
 	/**

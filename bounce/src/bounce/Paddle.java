@@ -13,16 +13,12 @@ import jig.Vector;
  class Paddle extends Entity {
 
 	private Vector velocity;
-	public int width;
-	public int height;
 
 	public Paddle(final float x, final float y) {
 		super(x, y);
 		addImageWithBoundingBox(ResourceManager
 				.getImage(BounceGame.PADDLE_PADDLEIMG_RSC));
 		velocity = new Vector(0, 0);
-		width = 120;
-		height = 25;
 	}
 
 	public void setVelocity(final Vector v) {

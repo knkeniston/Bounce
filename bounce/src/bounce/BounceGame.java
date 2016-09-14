@@ -47,13 +47,18 @@ public class BounceGame extends StateBasedGame {
 	public static final int GAMEOVERSTATE = 2;
 	
 	public static final String BALL_BALLIMG_RSC = "bounce/resource/ball.png";
-	public static final String BALL_BROKENIMG_RSC = "bounce/resource/brokenball.png";
 	public static final String GAMEOVER_BANNER_RSC = "bounce/resource/gameover.png";
 	public static final String STARTUP_BANNER_RSC = "bounce/resource/PressSpace.png";
 	public static final String BANG_EXPLOSIONIMG_RSC = "bounce/resource/explosion.png";
 	public static final String BANG_EXPLOSIONSND_RSC = "bounce/resource/explosion.wav";
 	public static final String PADDLE_PADDLEIMG_RSC = "bounce/resource/paddle.png";
-	public static final String BRICK_BRICKIMG_RSC = "bounce/resource/brick.png";
+	
+	public static final String BRICK_BRICK_1_IMG_RSC = "bounce/resource/brick.png";
+	public static final String BRICK_BRICK_2_1_IMG_RSC = "bounce/resource/brick_2_1.png";
+	public static final String BRICK_BRICK_2_2_IMG_RSC = "bounce/resource/brick2_2.png";
+	public static final String BRICK_BRICK_3_1_IMG_RSC = "bounce/resource/brick_3_1.png";
+	public static final String BRICK_BRICK_3_2_IMG_RSC = "bounce/resource/brick_3_2.png";
+	public static final String BRICK_BRICK_3_3_IMG_RSC = "bounce/resource/brick_3_3.png";
 
 	public final int ScreenWidth;
 	public final int ScreenHeight;
@@ -99,12 +104,16 @@ public class BounceGame extends StateBasedGame {
 
 		// preload all the resources to avoid warnings & minimize latency...
 		ResourceManager.loadImage(BALL_BALLIMG_RSC);
-		ResourceManager.loadImage(BALL_BROKENIMG_RSC);
 		ResourceManager.loadImage(GAMEOVER_BANNER_RSC);
 		ResourceManager.loadImage(STARTUP_BANNER_RSC);
 		ResourceManager.loadImage(BANG_EXPLOSIONIMG_RSC);
 		ResourceManager.loadImage(PADDLE_PADDLEIMG_RSC);
-		ResourceManager.loadImage(BRICK_BRICKIMG_RSC);
+		ResourceManager.loadImage(BRICK_BRICK_1_IMG_RSC);
+		ResourceManager.loadImage(BRICK_BRICK_2_1_IMG_RSC);
+		ResourceManager.loadImage(BRICK_BRICK_2_2_IMG_RSC);
+		ResourceManager.loadImage(BRICK_BRICK_3_1_IMG_RSC);
+		ResourceManager.loadImage(BRICK_BRICK_3_2_IMG_RSC);
+		ResourceManager.loadImage(BRICK_BRICK_3_3_IMG_RSC);
 		
 		level = 1;
 		ball = new Ball(ScreenWidth / 2, ScreenHeight / 2, .1f, .2f);
