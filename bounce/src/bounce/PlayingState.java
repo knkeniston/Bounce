@@ -1,8 +1,10 @@
 package bounce;
 
+import java.util.ArrayList;
 import java.util.Iterator;
 
 import jig.Collision;
+import jig.ResourceManager;
 import jig.Vector;
 
 import org.newdawn.slick.GameContainer;
@@ -51,6 +53,9 @@ class PlayingState extends BasicGameState {
 		
 		bg.ball.render(g);
 		bg.paddle.render(g);
+		for (Brick b: bg.bricks) {
+			b.render(g);
+		}
 		
 		g.drawString("Bounces: " + bounces, 10, 30);
 		g.drawString("Lives: " + lives, 10, 50);
@@ -66,6 +71,7 @@ class PlayingState extends BasicGameState {
 		Input input = container.getInput();
 		BounceGame bg = (BounceGame)game;
 		
+		// Control user input
 		if (input.isKeyDown(Input.KEY_A)) {
 			bg.paddle.setVelocity(new Vector(-.3f, 0));
 		}
@@ -76,13 +82,33 @@ class PlayingState extends BasicGameState {
 			bg.paddle.setVelocity(new Vector(0f, 0f));
 		}
 		
-		Collision collide = bg.ball.collides(bg.paddle);
-		if (collide != null && timeLastCol <= 0) {
+		// Collision between ball and paddle
+		Collision paddleCol = bg.ball.collides(bg.paddle);
+		if (paddleCol != null && timeLastCol <= 0) {
 			bg.ball.bounce(2);
 			timeLastCol = 10;
 		}
+		timeLastCol--;
 		
-		// bounce the ball...
+		// Collision between ball and brick
+		ArrayList<Brick> toRemove = new ArrayList<Brick>();
+		for (Brick b : bg.bricks) {
+			Collision brickCol = bg.ball.collides(b);
+			if (brickCol != null && timeLastCol <= 0) {
+				bg.ball.bounce(2);
+				b.decHealth();
+				if (b.getHealth() == 0) {
+					toRemove.add(b);
+					bg.explosions.add(new Bang(b.getX(), b.getY()));
+				}
+			}
+		}
+		for (Brick b : toRemove) {
+			bg.bricks.remove(b);
+		}
+		
+		
+		// Collision between ball and wall
 		boolean bounced = false;		
 		if ((bg.ball.getCoarseGrainedMaxX() > bg.ScreenWidth
 				|| bg.ball.getCoarseGrainedMinX() < 0) && timeX <= 0) {
@@ -101,15 +127,12 @@ class PlayingState extends BasicGameState {
 		}
 		timeX--;
 		timeY--;
-		timeLastCol--;
 		
+		//Updating animations
 		if (bounced) {
-			bg.explosions.add(new Bang(bg.ball.getX(), bg.ball.getY()));
 			bounces++;
 		}
-		
 		bg.ball.update(delta);
-		
 		bg.paddle.update(delta);
 		
 		// check if there are any finished explosions, if so remove them
@@ -119,6 +142,7 @@ class PlayingState extends BasicGameState {
 			}
 		}
 
+		// Game over state if no lives left
 		if (lives <= 0) {
 			((GameOverState)game.getState(BounceGame.GAMEOVERSTATE)).setUserScore(bounces);
 			game.enterState(BounceGame.GAMEOVERSTATE);
