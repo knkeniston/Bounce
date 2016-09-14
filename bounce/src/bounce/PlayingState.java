@@ -2,6 +2,7 @@ package bounce;
 
 import java.util.Iterator;
 
+import jig.Collision;
 import jig.Vector;
 
 import org.newdawn.slick.GameContainer;
@@ -27,6 +28,7 @@ class PlayingState extends BasicGameState {
 	int lives;
 	int timeX;
 	int timeY;
+	int timeLastCol;
 	
 	@Override
 	public void init(GameContainer container, StateBasedGame game)
@@ -39,6 +41,7 @@ class PlayingState extends BasicGameState {
 		lives = 3;
 		timeX = 0;
 		timeY = 0;
+		timeLastCol = 0;
 		container.setSoundOn(true);
 	}
 	@Override
@@ -73,6 +76,12 @@ class PlayingState extends BasicGameState {
 			bg.paddle.setVelocity(new Vector(0f, 0f));
 		}
 		
+		Collision collide = bg.ball.collides(bg.paddle);
+		if (collide != null && timeLastCol <= 0) {
+			bg.ball.bounce(2);
+			timeLastCol = 10;
+		}
+		
 		// bounce the ball...
 		boolean bounced = false;		
 		if ((bg.ball.getCoarseGrainedMaxX() > bg.ScreenWidth
@@ -92,6 +101,7 @@ class PlayingState extends BasicGameState {
 		}
 		timeX--;
 		timeY--;
+		timeLastCol--;
 		
 		if (bounced) {
 			bg.explosions.add(new Bang(bg.ball.getX(), bg.ball.getY()));
