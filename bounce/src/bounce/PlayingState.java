@@ -158,8 +158,8 @@ class PlayingState extends BasicGameState {
 			if (timeBricks.containsKey(b) && timeBricks.get(b) > 0) {
 				cont = false;
 			}
-			if (brickCol != null && cont) {
-				bg.ball.bounce(2);
+			if (brickCol != null && cont) { 
+				bg.ball.bounce(0);
 				b.decHealth();
 				timeBricks.put(b, 10);
 				if (b.getHealth() == 0) {
