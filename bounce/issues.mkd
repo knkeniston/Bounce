@@ -22,4 +22,6 @@
 ## Open Issues ##
 
 - **[19]** Customized splash screen with my name
- 
+- **[20]** Fix ball collision with bricks
+- **[21]** Add custom sounds
+- **[22]** Add custom images for bricks, paddle, ball
