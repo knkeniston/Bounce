@@ -18,7 +18,8 @@
 
 ## Open Issues ##
 
-- **[16]** Cheat codes to allow easy visual/access of all levels and features with single key press
-- **[17]** Customized splash screen with my name
-- **[18]** Have point on paddle hit influence direction of ball when collided
+- **[16]** Fix collision of ball w/ bricks
+- **[17]** Have point on paddle hit influence direction of ball when collided
+- **[18]** Cheat codes to allow easy visual/access of all levels and features with single key press
+- **[19]** Customized splash screen with my name
  
