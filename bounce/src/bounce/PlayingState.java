@@ -35,22 +35,53 @@ class PlayingState extends BasicGameState {
 	int timeX;
 	int timeY;
 	int timeLastCol;
+	boolean addBricks;
 	Map<Brick, Integer> timeBricks;
 	
 	@Override
 	public void init(GameContainer container, StateBasedGame game)
 			throws SlickException {
+		lives = 3;
+		bounces = 0;
 	}
 
 	@Override
 	public void enter(GameContainer container, StateBasedGame game) {
-		bounces = 0;
-		lives = 3;
 		timeX = 0;
 		timeY = 0;
 		timeLastCol = 0;
 		timeBricks = new HashMap<Brick, Integer>();
 		container.setSoundOn(true);
+		BounceGame bg = (BounceGame)game;
+		bg.bricks.clear();
+		
+		if (bg.level == 1) {
+			for (int i = 1; i <= 4; i++) {
+				bg.bricks.add(new Brick(i * (bg.ScreenWidth / 5), 200, bg.level));
+			}
+			bg.ball.setVelocity(new Vector(.1f, .2f));
+		}
+		if (bg.level == 2) {
+			for (int i = 1; i <= 5; i++) {
+				bg.bricks.add(new Brick(i * (bg.ScreenWidth / 6), 100, bg.level));
+			}
+			for (int i = 1; i <= 4; i++) {
+				bg.bricks.add(new Brick(i * (bg.ScreenWidth / 5), 250, bg.level));
+			}
+			bg.ball.setVelocity(new Vector(.2f, .3f));
+		} else if (bg.level == 3) {
+			for (int i = 1; i <= 5; i++) {
+				bg.bricks.add(new Brick(i * (bg.ScreenWidth / 6), 50, bg.level));
+			}
+			for (int i = 1; i <= 4; i++) {
+				bg.bricks.add(new Brick(i * (bg.ScreenWidth / 5), 200, bg.level));
+			}
+			for (int i = 1; i <= 3; i++) {
+				bg.bricks.add(new Brick(i * (bg.ScreenWidth / 4), 350, bg.level));
+			}
+			bg.ball.setVelocity(new Vector(.3f, .4f));
+		}
+		bg.ball.setPosition(bg.ScreenWidth / 2, bg.ScreenHeight / 2);
 	}
 	@Override
 	public void render(GameContainer container, StateBasedGame game,
@@ -83,7 +114,19 @@ class PlayingState extends BasicGameState {
 		}
 		else if (input.isKeyDown(Input.KEY_D)) {
 			bg.paddle.setVelocity(new Vector(.3f, 0f));
-		}
+		} 
+		else if (input.isKeyDown(Input.KEY_1)) {
+			bg.level = 1;
+			game.enterState(BounceGame.STARTUPSTATE, new EmptyTransition(), new HorizontalSplitTransition());
+		} 
+		else if (input.isKeyDown(Input.KEY_2)) {
+			bg.level = 2;
+			game.enterState(BounceGame.STARTUPSTATE, new EmptyTransition(), new HorizontalSplitTransition());
+		} 
+		else if (input.isKeyDown(Input.KEY_3)) {
+			bg.level = 3;
+			game.enterState(BounceGame.STARTUPSTATE, new EmptyTransition(), new HorizontalSplitTransition());
+		} 
 		else {
 			bg.paddle.setVelocity(new Vector(0f, 0f));
 		}
@@ -102,8 +145,7 @@ class PlayingState extends BasicGameState {
 			} else {
 				bg.ball.setVelocity(new Vector(newX, -1 * newY));
 			}
-			
-			//bg.ball.bounce(diffX);
+
 			timeLastCol = 10;
 		}
 		timeLastCol--;
@@ -170,34 +212,14 @@ class PlayingState extends BasicGameState {
 		// Change levels
 		if (bg.bricks.size() == 0) {
 			bg.level++;
-			if (bg.level == 2) {
-				for (int i = 1; i <= 5; i++) {
-					bg.bricks.add(new Brick(i * (bg.ScreenWidth / 6), 100, bg.level));
-				}
-				for (int i = 1; i <= 4; i++) {
-					bg.bricks.add(new Brick(i * (bg.ScreenWidth / 5), 250, bg.level));
-				}
-				bg.ball.setVelocity(bg.ball.getVelocity().scale(1.5f));
-			} else if (bg.level == 3) {
-				for (int i = 1; i <= 5; i++) {
-					bg.bricks.add(new Brick(i * (bg.ScreenWidth / 6), 50, bg.level));
-				}
-				for (int i = 1; i <= 4; i++) {
-					bg.bricks.add(new Brick(i * (bg.ScreenWidth / 5), 200, bg.level));
-				}
-				for (int i = 1; i <= 3; i++) {
-					bg.bricks.add(new Brick(i * (bg.ScreenWidth / 4), 350, bg.level));
-				}
-				bg.ball.setVelocity(bg.ball.getVelocity().scale(1.2f));
-			}
-			bg.ball.setPosition(bg.ScreenWidth / 2, bg.ScreenHeight / 2);
-			bg.ball.setLifeWait();
-			//game.enterState(BounceGame.STARTUPSTATE, new EmptyTransition(), new HorizontalSplitTransition() );
+			game.enterState(BounceGame.STARTUPSTATE, new EmptyTransition(), new HorizontalSplitTransition());
 		}
 
 		// Game over state if no lives left
 		if (lives <= 0) {
 			((GameOverState)game.getState(BounceGame.GAMEOVERSTATE)).setUserScore(bounces);
+			bg.level = 1;
+			lives = 3;
 			game.enterState(BounceGame.GAMEOVERSTATE);
 		}
 		
