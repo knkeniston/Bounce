@@ -11,13 +11,25 @@ import jig.Vector;
  * 
  */
  class Brick extends Entity {
+	int level;
+	int health;
 
-	public Brick(final float x, final float y) {
+	public Brick(final float x, final float y, int level) {
 		super(x, y);
 		addImageWithBoundingBox(ResourceManager
 				.getImage(BounceGame.BRICK_BRICKIMG_RSC));
+		this.level = level;
+		this.health = level;
 	}
-
+	
+	public int getHealth() {
+		return this.health;
+	}
+	
+	public void decHealth() {
+		this.health -= 1;
+	}
+	
 	/**
 	 * Update the Ball based on how much time has passed...
 	 * 

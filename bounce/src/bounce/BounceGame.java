@@ -103,13 +103,14 @@ public class BounceGame extends StateBasedGame {
 		ResourceManager.loadImage(STARTUP_BANNER_RSC);
 		ResourceManager.loadImage(BANG_EXPLOSIONIMG_RSC);
 		ResourceManager.loadImage(PADDLE_PADDLEIMG_RSC);
+		ResourceManager.loadImage(BRICK_BRICKIMG_RSC);
 		
 		ball = new Ball(ScreenWidth / 2, ScreenHeight / 2, .1f, .2f);
 		paddle = new Paddle(ScreenWidth / 2, ScreenHeight - 13);
 		bricks = new ArrayList<Brick>(4);	
 		int chunk = ScreenWidth / 4;
 		for (int i = 1; i <= 4; i++) {
-			bricks.add(new Brick(i * chunk - 60, 200));
+			bricks.add(new Brick(i * chunk - 60, 200, 1));
 		}
 
 	}
