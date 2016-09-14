@@ -18,10 +18,10 @@
 - **[16]** Fix collision of ball w/ bricks
 - **[18]** Have point on paddle hit influence direction of ball when collided
 - **[17]** Cheat codes to allow easy visual/access of all levels and features with single key press
+- **[20]** Fix ball collision with bricks
 
 ## Open Issues ##
 
 - **[19]** Customized splash screen with my name
-- **[20]** Fix ball collision with bricks
 - **[21]** Add custom sounds
 - **[22]** Add custom images for bricks, paddle, ball
