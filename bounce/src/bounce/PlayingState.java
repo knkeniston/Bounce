@@ -1,7 +1,9 @@
 package bounce;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 
 import jig.Collision;
 import jig.ResourceManager;
@@ -33,6 +35,7 @@ class PlayingState extends BasicGameState {
 	int timeX;
 	int timeY;
 	int timeLastCol;
+	Map<Brick, Integer> timeBricks;
 	
 	@Override
 	public void init(GameContainer container, StateBasedGame game)
@@ -46,6 +49,7 @@ class PlayingState extends BasicGameState {
 		timeX = 0;
 		timeY = 0;
 		timeLastCol = 0;
+		timeBricks = new HashMap<Brick, Integer>();
 		container.setSoundOn(true);
 	}
 	@Override
@@ -59,9 +63,8 @@ class PlayingState extends BasicGameState {
 			b.render(g);
 		}
 		
-		g.drawString("Bounces: " + bounces, 10, 30);
 		g.drawString("Lives: " + lives, 10, 50);
-		g.drawString("Level: " + bg.level, 10, 70);
+		g.drawString("Level: " + bg.level, 10, 30);
 		
 		for (Bang b : bg.explosions)
 			b.render(g);
@@ -97,15 +100,24 @@ class PlayingState extends BasicGameState {
 		ArrayList<Brick> toRemove = new ArrayList<Brick>();
 		for (Brick b : bg.bricks) {
 			Collision brickCol = bg.ball.collides(b);
-			if (brickCol != null && timeLastCol <= 0) {
+			boolean cont = true;
+			if (timeBricks.containsKey(b) && timeBricks.get(b) > 0) {
+				cont = false;
+			}
+			if (brickCol != null && cont) {
 				bg.ball.bounce(2);
 				b.decHealth();
+				timeBricks.put(b, 10);
 				if (b.getHealth() == 0) {
 					toRemove.add(b);
 					bg.explosions.add(new Bang(b.getX(), b.getY()));
 				}
 			}
 		}
+		for (Brick b : timeBricks.keySet()) {
+			timeBricks.put(b, timeBricks.get(b) - 1);
+		}
+		
 		for (Brick b : toRemove) {
 			bg.bricks.remove(b);
 		}
@@ -165,7 +177,7 @@ class PlayingState extends BasicGameState {
 				for (int i = 1; i <= 3; i++) {
 					bg.bricks.add(new Brick(i * (bg.ScreenWidth / 4), 350, bg.level));
 				}
-				bg.ball.setVelocity(bg.ball.getVelocity().scale(1.5f));
+				bg.ball.setVelocity(bg.ball.getVelocity().scale(1.2f));
 			}
 			bg.ball.setPosition(bg.ScreenWidth / 2, bg.ScreenHeight / 2);
 			bg.ball.setLifeWait();
