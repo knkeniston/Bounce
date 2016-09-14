@@ -57,7 +57,8 @@ public class BounceGame extends StateBasedGame {
 
 	public final int ScreenWidth;
 	public final int ScreenHeight;
-
+	
+	int level;
 	Ball ball;
 	Paddle paddle;
 	ArrayList<Bang> explosions;
@@ -105,12 +106,13 @@ public class BounceGame extends StateBasedGame {
 		ResourceManager.loadImage(PADDLE_PADDLEIMG_RSC);
 		ResourceManager.loadImage(BRICK_BRICKIMG_RSC);
 		
+		level = 1;
 		ball = new Ball(ScreenWidth / 2, ScreenHeight / 2, .1f, .2f);
 		paddle = new Paddle(ScreenWidth / 2, ScreenHeight - 13);
-		bricks = new ArrayList<Brick>(4);	
+		bricks = new ArrayList<Brick>();	
 		int chunk = ScreenWidth / 4;
 		for (int i = 1; i <= 4; i++) {
-			bricks.add(new Brick(i * chunk - 60, 200, 1));
+			bricks.add(new Brick(i * (ScreenWidth / 5), 200, level));
 		}
 
 	}
