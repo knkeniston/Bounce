@@ -78,7 +78,6 @@ class StartUpState extends BasicGameState {
 				i.remove();
 			}
 		}
-
 	}
 
 	@Override
