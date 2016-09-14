@@ -10,12 +10,12 @@
 - **[8]** Use fully specified resource path, preload resources if possible
 - **[9]** Add paddle object moved by user input
 - **[12]** "Lives remaining" indicator that shows player initially has 3 lives
+- **[13]** Game Over message when no lives are left
 
 ## Open Issues ##
 
 - **[10]** Fix ball bounce collision
 - **[11]** Add paddle collision when ball hits it to influence ball's direction
-- **[13]** Game Over message when no lives are left
 - **[14]** Bricks placed in some configuration near top of screen and "destroyed" when hit
 - **[15]** Progression of at least 3 levels where game gets more difficult
 - **[16]** Cheat codes to allow easy visual/access of all levels and features with single key press
