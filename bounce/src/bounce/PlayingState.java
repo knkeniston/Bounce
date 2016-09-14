@@ -51,6 +51,9 @@ class PlayingState extends BasicGameState {
 		
 		bg.ball.render(g);
 		bg.paddle.render(g);
+		for (Brick b: bg.bricks) {
+			b.render(g);
+		}
 		
 		g.drawString("Bounces: " + bounces, 10, 30);
 		g.drawString("Lives: " + lives, 10, 50);

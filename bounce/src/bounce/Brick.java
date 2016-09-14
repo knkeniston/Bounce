@@ -15,7 +15,7 @@ import jig.Vector;
 	public Brick(final float x, final float y) {
 		super(x, y);
 		addImageWithBoundingBox(ResourceManager
-				.getImage(BounceGame.BALL_BALLIMG_RSC));
+				.getImage(BounceGame.BRICK_BRICKIMG_RSC));
 	}
 
 	/**

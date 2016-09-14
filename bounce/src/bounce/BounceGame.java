@@ -53,6 +53,7 @@ public class BounceGame extends StateBasedGame {
 	public static final String BANG_EXPLOSIONIMG_RSC = "bounce/resource/explosion.png";
 	public static final String BANG_EXPLOSIONSND_RSC = "bounce/resource/explosion.wav";
 	public static final String PADDLE_PADDLEIMG_RSC = "bounce/resource/paddle.png";
+	public static final String BRICK_BRICKIMG_RSC = "bounce/resource/brick.png";
 
 	public final int ScreenWidth;
 	public final int ScreenHeight;
@@ -60,6 +61,7 @@ public class BounceGame extends StateBasedGame {
 	Ball ball;
 	Paddle paddle;
 	ArrayList<Bang> explosions;
+	ArrayList<Brick> bricks;
 
 	/**
 	 * Create the BounceGame frame, saving the width and height for later use.
@@ -77,8 +79,7 @@ public class BounceGame extends StateBasedGame {
 		ScreenWidth = width;
 
 		Entity.setCoarseGrainedCollisionBoundary(Entity.AABB);
-		explosions = new ArrayList<Bang>(10);
-				
+		explosions = new ArrayList<Bang>(10);	
 	}
 
 
@@ -105,6 +106,11 @@ public class BounceGame extends StateBasedGame {
 		
 		ball = new Ball(ScreenWidth / 2, ScreenHeight / 2, .1f, .2f);
 		paddle = new Paddle(ScreenWidth / 2, ScreenHeight - 13);
+		bricks = new ArrayList<Brick>(4);	
+		int chunk = ScreenWidth / 4;
+		for (int i = 1; i <= 4; i++) {
+			bricks.add(new Brick(i * chunk - 60, 200));
+		}
 
 	}
 	
