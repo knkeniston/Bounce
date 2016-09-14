@@ -14,10 +14,10 @@
 - **[10]** Fix ball bounce collision
 - **[11]** Add paddle collision
 - **[14]** Bricks placed in some configuration near top of screen and "destroyed" when hit
+- **[15]** Progression of at least 3 levels where game gets more difficult
 
 ## Open Issues ##
 
-- **[15]** Progression of at least 3 levels where game gets more difficult
 - **[16]** Cheat codes to allow easy visual/access of all levels and features with single key press
 - **[17]** Customized splash screen with my name
 - **[18]** Have point on paddle hit influence direction of ball when collided
