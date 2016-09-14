@@ -13,6 +13,8 @@ import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
+import org.newdawn.slick.state.transition.EmptyTransition;
+import org.newdawn.slick.state.transition.HorizontalSplitTransition;
 
 
 /**
@@ -59,6 +61,7 @@ class PlayingState extends BasicGameState {
 		
 		g.drawString("Bounces: " + bounces, 10, 30);
 		g.drawString("Lives: " + lives, 10, 50);
+		g.drawString("Level: " + bg.level, 10, 70);
 		
 		for (Bang b : bg.explosions)
 			b.render(g);
@@ -107,7 +110,6 @@ class PlayingState extends BasicGameState {
 			bg.bricks.remove(b);
 		}
 		
-		
 		// Collision between ball and wall
 		boolean bounced = false;		
 		if ((bg.ball.getCoarseGrainedMaxX() > bg.ScreenWidth
@@ -140,6 +142,34 @@ class PlayingState extends BasicGameState {
 			if (!i.next().isActive()) {
 				i.remove();
 			}
+		}
+		
+		// Change levels
+		if (bg.bricks.size() == 0) {
+			bg.level++;
+			if (bg.level == 2) {
+				for (int i = 1; i <= 5; i++) {
+					bg.bricks.add(new Brick(i * (bg.ScreenWidth / 6), 100, bg.level));
+				}
+				for (int i = 1; i <= 4; i++) {
+					bg.bricks.add(new Brick(i * (bg.ScreenWidth / 5), 250, bg.level));
+				}
+				bg.ball.setVelocity(bg.ball.getVelocity().scale(1.5f));
+			} else if (bg.level == 3) {
+				for (int i = 1; i <= 5; i++) {
+					bg.bricks.add(new Brick(i * (bg.ScreenWidth / 6), 50, bg.level));
+				}
+				for (int i = 1; i <= 4; i++) {
+					bg.bricks.add(new Brick(i * (bg.ScreenWidth / 5), 200, bg.level));
+				}
+				for (int i = 1; i <= 3; i++) {
+					bg.bricks.add(new Brick(i * (bg.ScreenWidth / 4), 350, bg.level));
+				}
+				bg.ball.setVelocity(bg.ball.getVelocity().scale(1.5f));
+			}
+			bg.ball.setPosition(bg.ScreenWidth / 2, bg.ScreenHeight / 2);
+			bg.ball.setLifeWait();
+			//game.enterState(BounceGame.STARTUPSTATE, new EmptyTransition(), new HorizontalSplitTransition() );
 		}
 
 		// Game over state if no lives left
