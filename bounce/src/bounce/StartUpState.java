@@ -42,8 +42,17 @@ class StartUpState extends BasicGameState {
 		bg.ball.render(g);
 		for (Bang b : bg.explosions)
 			b.render(g);
-		g.drawImage(ResourceManager.getImage(BounceGame.STARTUP_BANNER_RSC),
-				225, 270);		
+		if (bg.level == 1) {
+			g.drawImage(ResourceManager.getImage(BounceGame.SPLASH_BANNER_RSC),
+					100, 100);	
+		} else if (bg.level == 2) {
+			g.drawImage(ResourceManager.getImage(BounceGame.STARTUP_2_BANNER_RSC),
+					150, 150);	
+		} else {
+			g.drawImage(ResourceManager.getImage(BounceGame.STARTUP_3_BANNER_RSC),
+					150, 150);
+		}
+		
 	}
 
 	@Override

@@ -47,11 +47,16 @@ public class BounceGame extends StateBasedGame {
 	public static final int GAMEOVERSTATE = 2;
 	
 	public static final String BALL_BALLIMG_RSC = "bounce/resource/ball.png";
+	public static final String PADDLE_PADDLEIMG_RSC = "bounce/resource/paddle.png";
+	
 	public static final String GAMEOVER_BANNER_RSC = "bounce/resource/gameover.png";
-	public static final String STARTUP_BANNER_RSC = "bounce/resource/PressSpace.png";
+	public static final String STARTUP_2_BANNER_RSC = "bounce/resource/PressSpace_2.png";
+	public static final String STARTUP_3_BANNER_RSC = "bounce/resource/PressSpace_3.png";
+	public static final String SPLASH_BANNER_RSC = "bounce/resource/SplashScreen.png";
+	public static final String YOUWIN_BANNER_RSC = "bounce/resource/YouWin.png";
+	
 	public static final String BANG_EXPLOSIONIMG_RSC = "bounce/resource/explosion.png";
 	public static final String BANG_EXPLOSIONSND_RSC = "bounce/resource/explosion.wav";
-	public static final String PADDLE_PADDLEIMG_RSC = "bounce/resource/paddle.png";
 	
 	public static final String BRICK_BRICK_1_IMG_RSC = "bounce/resource/brick.png";
 	public static final String BRICK_BRICK_2_1_IMG_RSC = "bounce/resource/brick_2_1.png";
@@ -105,7 +110,10 @@ public class BounceGame extends StateBasedGame {
 		// preload all the resources to avoid warnings & minimize latency...
 		ResourceManager.loadImage(BALL_BALLIMG_RSC);
 		ResourceManager.loadImage(GAMEOVER_BANNER_RSC);
-		ResourceManager.loadImage(STARTUP_BANNER_RSC);
+		ResourceManager.loadImage(YOUWIN_BANNER_RSC);
+		ResourceManager.loadImage(STARTUP_2_BANNER_RSC);
+		ResourceManager.loadImage(STARTUP_3_BANNER_RSC);
+		ResourceManager.loadImage(SPLASH_BANNER_RSC);
 		ResourceManager.loadImage(BANG_EXPLOSIONIMG_RSC);
 		ResourceManager.loadImage(PADDLE_PADDLEIMG_RSC);
 		ResourceManager.loadImage(BRICK_BRICK_1_IMG_RSC);
@@ -125,7 +133,7 @@ public class BounceGame extends StateBasedGame {
 	public static void main(String[] args) {
 		AppGameContainer app;
 		try {
-			app = new AppGameContainer(new BounceGame("Bounce!", 800, 600));
+			app = new AppGameContainer(new BounceGame("Break Out!", 800, 600));
 			app.setDisplayMode(800, 600, false);
 			app.setVSync(true);
 			app.start();

@@ -212,6 +212,9 @@ class PlayingState extends BasicGameState {
 		// Change levels
 		if (bg.bricks.size() == 0) {
 			bg.level++;
+			if (bg.level == 4) {
+				game.enterState(BounceGame.GAMEOVERSTATE, new EmptyTransition(), new HorizontalSplitTransition());
+			}
 			game.enterState(BounceGame.STARTUPSTATE, new EmptyTransition(), new HorizontalSplitTransition());
 		}
 
