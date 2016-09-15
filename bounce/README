@@ -1,0 +1,24 @@
+Kelly Keniston
+kelly.keniston38@gmail.com
+CS 447 Autumn 2016
+
+This repository contains a full game of Break Out! (also called Bounce).
+The game is played by using the A and D keys to move the paddle on the bottom
+to the left or to the right in order to bounce the ball back up on the screen
+in order to hit and destroy the bricks. If the ball falls below the screen,
+the player loses a life. If all of the bricks on the screen are destroyed, the
+player either moves on to the next level or wins the game. If 3 lives are lost, 
+the player loses the game.
+
+The cheat codes for warping to different levels are the key 1 for level 1,
+2 for level 2, and 3 for level 3.
+
+I changed this project by fixing the ball's collision physics, adding the
+paddle and changing the direction of the ball based on where it was hit on the 
+paddle, added the bricks that can be destroyed, created the three levels with 
+harder-to-break bricks and a faster ball, cheat codes to warp to different levels,
+and custom images, sounds, and screens.
+
+The external resources that I used for images were found on Google Images (filtered
+for public domain noncommercial use). The custom sounds that I used were found on
+freesounds.com.
