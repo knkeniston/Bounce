@@ -22,6 +22,8 @@ import org.newdawn.slick.state.StateBasedGame;
  * Transitions To PlayingState
  */
 class StartUpState extends BasicGameState {
+	int timeX;
+	int timeY;
 
 	@Override
 	public void init(GameContainer container, StateBasedGame game)
@@ -31,6 +33,8 @@ class StartUpState extends BasicGameState {
 	@Override
 	public void enter(GameContainer container, StateBasedGame game) {
 		container.setSoundOn(false);
+		timeX = 0;
+		timeY = 0;
 	}
 
 
@@ -67,18 +71,20 @@ class StartUpState extends BasicGameState {
 		
 		// bounce the ball...
 		boolean bounced = false;
-		if (bg.ball.getCoarseGrainedMaxX() > bg.ScreenWidth
-				|| bg.ball.getCoarseGrainedMinX() < 0) {
+		if ((bg.ball.getCoarseGrainedMaxX() > bg.ScreenWidth
+				|| bg.ball.getCoarseGrainedMinX() < 0) && timeX <= 0) {
+			timeX = 10;
 			bg.ball.bounce(90);
 			bounced = true;
-		} else if (bg.ball.getCoarseGrainedMaxY() > bg.ScreenHeight
-				|| bg.ball.getCoarseGrainedMinY() < 0) {
+		} else if ((bg.ball.getCoarseGrainedMaxY() > bg.ScreenHeight
+				|| bg.ball.getCoarseGrainedMinY() < 0) && timeY <= 0) {
+			timeY = 10;
 			bg.ball.bounce(0);
 			bounced = true;
 		}
-		if (bounced) {
-			bg.explosions.add(new Bang(bg.ball.getX(), bg.ball.getY()));
-		}
+		timeX--;
+		timeY--;
+		
 		bg.ball.update(delta);
 
 		// check if there are any finished explosions, if so remove them
