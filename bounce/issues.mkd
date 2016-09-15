@@ -22,7 +22,6 @@
 - **[22]** Add custom images for bricks, paddle, ball
 - **[19]** Customized splash screen with my name
 - **[21]** Add custom sounds
+- **[22]** Clean up code
 
 ## Open Issues ##
-
-- **[22]** Clean up code
