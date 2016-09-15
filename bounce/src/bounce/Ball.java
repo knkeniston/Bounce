@@ -14,6 +14,7 @@ import jig.Vector;
 
 	private Vector velocity;
 	private int countdown;
+	private int lifeWait;
 
 	public Ball(final float x, final float y, final float vx, final float vy) {
 		super(x, y);
@@ -21,6 +22,7 @@ import jig.Vector;
 				.getImage(BounceGame.BALL_BALLIMG_RSC));
 		velocity = new Vector(vx, vy);
 		countdown = 0;
+		lifeWait = 0;
 	}
 
 	public void setVelocity(final Vector v) {
@@ -29,6 +31,14 @@ import jig.Vector;
 
 	public Vector getVelocity() {
 		return velocity;
+	}
+	
+	public void setLifeWait() {
+		lifeWait = 20;
+	}
+	
+	public int getLifeWait() {
+		return lifeWait;
 	}
 
 	/**
@@ -40,10 +50,6 @@ import jig.Vector;
 	 * @param surfaceTangent
 	 */
 	public void bounce(float surfaceTangent) {
-		removeImage(ResourceManager.getImage(BounceGame.BALL_BALLIMG_RSC));
-		addImageWithBoundingBox(ResourceManager
-				.getImage(BounceGame.BALL_BROKENIMG_RSC));
-		countdown = 500;
 		velocity = velocity.bounce(surfaceTangent);
 	}
 
@@ -54,15 +60,10 @@ import jig.Vector;
 	 *            the number of milliseconds since the last update
 	 */
 	public void update(final int delta) {
-		translate(velocity.scale(delta));
-		if (countdown > 0) {
-			countdown -= delta;
-			if (countdown <= 0) {
-				addImageWithBoundingBox(ResourceManager
-						.getImage(BounceGame.BALL_BALLIMG_RSC));
-				removeImage(ResourceManager
-						.getImage(BounceGame.BALL_BROKENIMG_RSC));
-			}
+		if (lifeWait <= 0) {
+			translate(velocity.scale(delta));
+		} else {
+			lifeWait--;
 		}
 	}
 }

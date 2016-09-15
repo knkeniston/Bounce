@@ -6,6 +6,7 @@ import jig.ResourceManager;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
+import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
@@ -50,19 +51,27 @@ class GameOverState extends BasicGameState {
 		g.drawString("Bounces: " + lastKnownBounces, 10, 30);
 		for (Bang b : bg.explosions)
 			b.render(g);
-		g.drawImage(ResourceManager.getImage(BounceGame.GAMEOVER_BANNER_RSC), 225,
-				270);
-
+		if (bg.level == 4) {
+			g.drawImage(ResourceManager.getImage(BounceGame.YOUWIN_BANNER_RSC), 100,
+					100);
+		} else {
+			g.drawImage(ResourceManager.getImage(BounceGame.GAMEOVER_BANNER_RSC), 100,
+					100);
+		}
 	}
 
 	@Override
 	public void update(GameContainer container, StateBasedGame game,
 			int delta) throws SlickException {
 		
+		Input input = container.getInput();
 		
 		timer -= delta;
-		if (timer <= 0)
+		if (timer <= 0 || input.isKeyDown(Input.KEY_SPACE)) {
+			BounceGame bg = (BounceGame)game;
+			bg.level = 1;
 			game.enterState(BounceGame.STARTUPSTATE, new EmptyTransition(), new HorizontalSplitTransition() );
+		}
 
 		// check if there are any finished explosions, if so remove them
 		for (Iterator<Bang> i = ((BounceGame)game).explosions.iterator(); i.hasNext();) {

@@ -8,6 +8,20 @@
 - **[6]** Add explosion sound
 - **[7]** Use a proper Slick StateBasedGame.
 - **[8]** Use fully specified resource path, preload resources if possible
+- **[9]** Add paddle object moved by user input
+- **[12]** "Lives remaining" indicator that shows player initially has 3 lives
+- **[13]** Game Over message when no lives are left
+- **[10]** Fix ball bounce collision
+- **[11]** Add paddle collision
+- **[14]** Bricks placed in some configuration near top of screen and "destroyed" when hit
+- **[15]** Progression of at least 3 levels where game gets more difficult
+- **[16]** Fix collision of ball w/ bricks
+- **[18]** Have point on paddle hit influence direction of ball when collided
+- **[17]** Cheat codes to allow easy visual/access of all levels and features with single key press
+- **[20]** Fix ball collision with bricks
+- **[22]** Add custom images for bricks, paddle, ball
+- **[19]** Customized splash screen with my name
+- **[21]** Add custom sounds
+- **[22]** Clean up code
 
 ## Open Issues ##
- 
