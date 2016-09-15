@@ -54,9 +54,13 @@ public class BounceGame extends StateBasedGame {
 	public static final String STARTUP_3_BANNER_RSC = "bounce/resource/PressSpace_3.png";
 	public static final String SPLASH_BANNER_RSC = "bounce/resource/SplashScreen.png";
 	public static final String YOUWIN_BANNER_RSC = "bounce/resource/YouWin.png";
-	
 	public static final String BANG_EXPLOSIONIMG_RSC = "bounce/resource/explosion.png";
-	public static final String BANG_EXPLOSIONSND_RSC = "bounce/resource/explosion.wav";
+	
+	public static final String HITWALL_RSC = "bounce/resource/wall_hit.wav";
+	public static final String HITPADDLE_RSC = "bounce/resource/paddle_hit.wav";
+	public static final String HITBRICK_RSC = "bounce/resource/brick_hit.wav";
+	public static final String LOSELIFE_RSC = "bounce/resource/lose_life.wav";
+	public static final String EXPLOSION_RSC = "bounce/resource/explosion.wav";
 	
 	public static final String BRICK_BRICK_1_IMG_RSC = "bounce/resource/brick.png";
 	public static final String BRICK_BRICK_2_1_IMG_RSC = "bounce/resource/brick_2_1.png";
@@ -104,8 +108,12 @@ public class BounceGame extends StateBasedGame {
 		// we preload it here to (1) reduce latency when we first play it
 		// and (2) because loading it will load the audio libraries and
 		// unless that is done now, we can't *disable* sound as we
-		// attempt to do in the startUp() method.
-		ResourceManager.loadSound(BANG_EXPLOSIONSND_RSC);	
+		// attempt to do in the startUp() method.		
+		ResourceManager.loadSound(HITWALL_RSC);	
+		ResourceManager.loadSound(HITPADDLE_RSC);	
+		ResourceManager.loadSound(HITBRICK_RSC);		
+		ResourceManager.loadSound(LOSELIFE_RSC);
+		ResourceManager.loadSound(EXPLOSION_RSC);
 
 		// preload all the resources to avoid warnings & minimize latency...
 		ResourceManager.loadImage(BALL_BALLIMG_RSC);

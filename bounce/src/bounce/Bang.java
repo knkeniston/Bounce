@@ -20,7 +20,7 @@ class Bang extends Entity {
 				true);
 		addAnimation(explosion);
 		explosion.setLooping(false);
-		ResourceManager.getSound(BounceGame.BANG_EXPLOSIONSND_RSC).play();
+		ResourceManager.getSound(BounceGame.EXPLOSION_RSC).play();
 	}
 
 	public boolean isActive() {

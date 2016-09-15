@@ -67,8 +67,11 @@ class GameOverState extends BasicGameState {
 		Input input = container.getInput();
 		
 		timer -= delta;
-		if (timer <= 0 || input.isKeyDown(Input.KEY_SPACE))
+		if (timer <= 0 || input.isKeyDown(Input.KEY_SPACE)) {
+			BounceGame bg = (BounceGame)game;
+			bg.level = 1;
 			game.enterState(BounceGame.STARTUPSTATE, new EmptyTransition(), new HorizontalSplitTransition() );
+		}
 
 		// check if there are any finished explosions, if so remove them
 		for (Iterator<Bang> i = ((BounceGame)game).explosions.iterator(); i.hasNext();) {
