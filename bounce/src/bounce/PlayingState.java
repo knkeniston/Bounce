@@ -145,7 +145,7 @@ class PlayingState extends BasicGameState {
 			} else {
 				bg.ball.setVelocity(new Vector(newX, -1 * newY));
 			}
-
+			ResourceManager.getSound(BounceGame.HITPADDLE_RSC).play();
 			timeLastCol = 10;
 		}
 		timeLastCol--;
@@ -165,6 +165,8 @@ class PlayingState extends BasicGameState {
 				if (b.getHealth() == 0) {
 					toRemove.add(b);
 					bg.explosions.add(new Bang(b.getX(), b.getY()));
+				} else {
+					ResourceManager.getSound(BounceGame.HITBRICK_RSC).play();
 				}
 			}
 		}
@@ -180,14 +182,17 @@ class PlayingState extends BasicGameState {
 		if ((bg.ball.getCoarseGrainedMaxX() > bg.ScreenWidth
 				|| bg.ball.getCoarseGrainedMinX() < 0) && timeX <= 0) {
 			timeX = 10;
+			ResourceManager.getSound(BounceGame.HITWALL_RSC).play();
 			bg.ball.bounce(90);
 			bounced = true;
 		} else if (bg.ball.getCoarseGrainedMinY() < 0 && timeY <= 0) {
 			timeY = 10;
+			ResourceManager.getSound(BounceGame.HITWALL_RSC).play();
 			bg.ball.bounce(0);
 			bounced = true;
 		}
 		if (bg.ball.getCoarseGrainedMaxY() > bg.ScreenHeight) {
+			ResourceManager.getSound(BounceGame.LOSELIFE_RSC).play();
 			this.lives -= 1;
 			bg.ball.setPosition(bg.ScreenWidth / 2, bg.ScreenHeight / 2);
 			bg.ball.setLifeWait();
@@ -214,8 +219,9 @@ class PlayingState extends BasicGameState {
 			bg.level++;
 			if (bg.level == 4) {
 				game.enterState(BounceGame.GAMEOVERSTATE, new EmptyTransition(), new HorizontalSplitTransition());
+			} else {
+				game.enterState(BounceGame.STARTUPSTATE, new EmptyTransition(), new HorizontalSplitTransition());
 			}
-			game.enterState(BounceGame.STARTUPSTATE, new EmptyTransition(), new HorizontalSplitTransition());
 		}
 
 		// Game over state if no lives left
